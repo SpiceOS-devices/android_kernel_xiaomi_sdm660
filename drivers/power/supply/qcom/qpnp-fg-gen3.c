@@ -3933,12 +3933,14 @@ static int fg_bcl_reset(struct fg_dev *chip)
 	int i, ret, rc = 0;
 	u8 val, peek_mux;
 	bool success = false;
+
 	/* Read initial value of peek mux1 */
 	rc = fg_read(chip, BATT_INFO_PEEK_MUX1(chip), &peek_mux, 1);
 	if (rc < 0) {
 		pr_err("Error in writing peek mux1, rc=%d\n", rc);
 		return rc;
 	}
+
 	val = 0x83;
 	rc = fg_write(chip, BATT_INFO_PEEK_MUX1(chip), &val, 1);
 	if (rc < 0) {
@@ -4057,6 +4059,7 @@ static int fg_psy_set_property(struct power_supply *psy,
 			return -EINVAL;
 		}
 		break;
+
 	case POWER_SUPPLY_PROP_CHARGE_FULL:
 		if (chip->cl.active) {
 			pr_warn("Capacity learning active!\n");

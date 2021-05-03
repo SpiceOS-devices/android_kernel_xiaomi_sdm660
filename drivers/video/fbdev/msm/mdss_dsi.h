@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /* Copyright (c) 2012-2021, The Linux Foundation. All rights reserved. */
-/* Copyright (C) 2019 XiaoMi, Inc. */
 
 #ifndef MDSS_DSI_H
 #define MDSS_DSI_H
