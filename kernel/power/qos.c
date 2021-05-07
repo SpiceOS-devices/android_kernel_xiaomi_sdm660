@@ -318,8 +318,8 @@ static inline int pm_qos_set_value_for_cpus(struct pm_qos_constraints *c,
  * This function returns 1 if the aggregated constraint value has changed, 0
  *  otherwise.
  */
-int pm_qos_update_target(struct pm_qos_constraints *c, struct plist_node *node,
-			 enum pm_qos_req_action action, int value)
+ int pm_qos_update_target(struct pm_qos_constraints *c, struct plist_node *node,
+ 			 enum pm_qos_req_action action, int value)
 {
 	unsigned long flags;
 	int prev_value, curr_value, new_value;
@@ -510,9 +510,9 @@ static void __pm_qos_update_request(struct pm_qos_request *req,
 	trace_pm_qos_update_request(req->pm_qos_class, new_value);
 
 	if (new_value != req->node.prio)
-		pm_qos_update_target(
-			pm_qos_array[req->pm_qos_class]->constraints,
-			&req->node, PM_QOS_UPDATE_REQ, new_value);
+	pm_qos_update_target(
+		pm_qos_array[req->pm_qos_class]->constraints,
+		&req->node, PM_QOS_UPDATE_REQ, new_value);
 }
 
 /**
@@ -571,8 +571,8 @@ static void pm_qos_irq_notify(struct irq_affinity_notify *notify,
 	spin_unlock_irqrestore(&pm_qos_lock, flags);
 
 	if (affinity_changed)
-		pm_qos_update_target(c, &req->node, PM_QOS_UPDATE_REQ,
-				     req->node.prio);
+	pm_qos_update_target(c, &req->node, PM_QOS_UPDATE_REQ,
+					 req->node.prio);
 }
 #endif
 
@@ -722,9 +722,9 @@ void pm_qos_update_request_timeout(struct pm_qos_request *req, s32 new_value,
 	trace_pm_qos_update_request_timeout(req->pm_qos_class,
 					    new_value, timeout_us);
 	if (new_value != req->node.prio)
-		pm_qos_update_target(
-			pm_qos_array[req->pm_qos_class]->constraints,
-			&req->node, PM_QOS_UPDATE_REQ, new_value);
+	pm_qos_update_target(
+		pm_qos_array[req->pm_qos_class]->constraints,
+		&req->node, PM_QOS_UPDATE_REQ, new_value);
 
 	schedule_delayed_work(&req->work, usecs_to_jiffies(timeout_us));
 }
